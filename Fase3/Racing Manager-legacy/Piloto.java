@@ -12,36 +12,30 @@ public class Piloto implements Serializable
 {
     //Variaveis de instancia
     private String nome;
-    private String nacionalidade;
-    private int qualidade;
-    private int qualidade_chuva;
-    private int palmares;
-    
+    private int sva;
+    private int cts;
+
+
     //Construtores
     public Piloto()
     {
         this.nome = "";
-        this.nacionalidade = "";
-        this.qualidade = 0;
-        this.qualidade_chuva = 0;
-        this.palmares = 0;
+        this.sva = 0;
+        this.cts = 0;
     }
     
-    public Piloto(String nome, String nacionalidade, int qual, int qual_chuva, int palmares)
+    public Piloto(String nome, int svaP, int ctsP)
     {
         this.nome = nome;
-        this.nacionalidade = nacionalidade;
-        this.qualidade = qual;
-        this.qualidade_chuva = qual_chuva;
-        this.palmares = palmares;
+        this.sva = svaP;
+        this.cts = ctsP;
     }
     
     public Piloto(Piloto p)
     {
         this.nome = p.getNome();
-        this.nacionalidade = p.getNacionalidade();
-        this.qualidade = p.getQualidade();
-        this.qualidade_chuva = p.getQualidadeChuva();
+        this.sva = p.getSVA();
+        this.cts = p.getCTS();
     }
     
     //Gets e Sets
@@ -49,45 +43,30 @@ public class Piloto implements Serializable
     {
         return this.nome;
     }
-    
-    public String getNacionalidade()
+
+    public int getSVA()
     {
-        return this.nacionalidade;
+        return this.sva;
     }
     
-    public int getQualidade()
+    public int getCTS()
     {
-        return this.qualidade;
-    }
-    
-    public int getQualidadeChuva()
-    {
-        return this.qualidade_chuva;
-    }
-    
-    public int getPalmares()
-    {
-        return this.palmares;
+        return this.cts;
     }
     
     public void setNome(String nome)
     {
         this.nome = nome;
     }
-    
-    public void setNacionalidade(String nacionalidade)
+
+    public void setSVA(int q)
     {
-        this.nacionalidade = nacionalidade;
+        this.sva = q;
     }
     
-    public void setQualidade(int q)
+    public void setCTS(int q)
     {
-        this.qualidade = q;
-    }
-    
-    public void setQualidadeChuva(int q)
-    {
-        this.qualidade_chuva = q;
+        this.cts = q;
     }
     
     public void setPalmares(int p)
@@ -100,10 +79,8 @@ public class Piloto implements Serializable
     {
         StringBuilder sb = new StringBuilder();
         sb.append("\nNome: "); sb.append(this.nome);
-        sb.append("\tNacionalidade: ");sb.append(this.nacionalidade);
-        sb.append("\tQualidade: ");sb.append(this.qualidade);
-        sb.append("\tQualidade á chuva: ");sb.append(this.qualidade_chuva);
-        sb.append("\tPalmares: ");sb.append(this.palmares);
+        sb.append("\tValor de Segurança vs. Agressividade: ");sb.append(this.sva);
+        sb.append("\tValor de Chuva vs Tempo Seco: ");sb.append(this.cts);
         return sb.toString();
     }
     
@@ -122,9 +99,7 @@ public class Piloto implements Serializable
         
         Piloto p = (Piloto) o;
         return (this.nome.equals(p.getNome()) && 
-                this.nacionalidade.equals(p.getNacionalidade()) &&
-                this.qualidade==p.getQualidade() &&
-                this.qualidade_chuva==p.getQualidadeChuva() &&
-                this.palmares == p.getPalmares());
+                this.sva==p.getSVA() &&
+                this.cts==p.getCTS() &&
     }
 }
