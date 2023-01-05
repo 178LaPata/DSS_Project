@@ -28,7 +28,7 @@ public abstract class Carro implements Serializable {
         this.fiabilidade = 0;
     }
 
-    public Carro(String marca, String modelo, int cilindrada, int pac, int potencia) {
+    public Carro(String marca, String modelo, int cilindrada, int pac, int potencia, int fiabilidade) {
         this.marca = marca;
         this.modelo = modelo;
         this.cilindrada = cilindrada;

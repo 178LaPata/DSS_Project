@@ -6,7 +6,6 @@
  * @version (a version number or a date)
  */
 
-import java.util.Map;
 import java.util.Random;
 
 public class PC2 extends Carro
@@ -18,19 +17,19 @@ public class PC2 extends Carro
         super();
     }
     
-    public PC2(String marca, String modelo, int cilindrada, int potencia, Equipa e,int p_mecanica)
+    public PC2(String marca, String modelo, int cilindrada, int potencia, int pac,int p_mecanica)
     {
-        super(marca,modelo,cilindrada,potencia,e,70);
+        super(marca,modelo,cilindrada,potencia,pac,70);
         this.preparacao_mecanica = p_mecanica;
     }
     
     public PC2(PC2 p)
     {
         super(p);
-        this.preparacao_mecanica = p.getPreparacaoMecaninca();
+        this.preparacao_mecanica = p.getPreparacaoMecanica();
     }
     
-    public int getPreparacaoMecaninca()
+    public int getPreparacaoMecanica()
     {
         return this.preparacao_mecanica;
     }
@@ -59,6 +58,6 @@ public class PC2 extends Carro
         
         PC2 c = (PC2) o;
         return ( super.equals(c)
-                && this.preparacao_mecanica == c.getPreparacaoMecaninca());
+                && this.preparacao_mecanica == c.getPreparacaoMecanica());
     }
 }

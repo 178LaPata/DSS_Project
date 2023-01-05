@@ -17,9 +17,9 @@ public class GT extends Carro
         super();
     }
     
-    public GT(String marca, String modelo, int cilindrada, int potencia, Equipa e)
+    public GT(String marca, String modelo, int cilindrada, int potencia, int pac)
     {
-        super(marca,modelo,cilindrada,potencia,e,0);
+        super(marca,modelo,cilindrada,potencia,pac,0);
     }
     
     public GT(GT p)

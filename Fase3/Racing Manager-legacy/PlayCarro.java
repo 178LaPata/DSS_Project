@@ -1,6 +1,7 @@
 public class PlayCarro implements Comparable<PlayCarro>{
     //Variáveis de instância
     private Carro car;
+    private Piloto driver;
     private int pacafin;
     private boolean dnf;
     private int afinsrestantes;
@@ -8,26 +9,65 @@ public class PlayCarro implements Comparable<PlayCarro>{
     enum MotorMode {
         Normal, Agressivo, Conservador, Undefined
     }
-    MotorMode modomotor;
+    private MotorMode modomotor;
     enum TPneus{
         Macio, Duro, Chuva, Undefined
     }
-    TPneus pneus;
+    private TPneus pneus;
 
     // Construtores
-    public PlayCarro(Carro car){
+    public PlayCarro(Carro car,Piloto driver){
         this.car = car;
+        this.driver = driver;
         this.pacafin = 0;
-        this.dnf = false;
         this.afinsrestantes = 0;
         this.tempo = 0;
         this.modomotor = MotorMode.Undefined;
         this.pneus = TPneus.Undefined;
+        this.dnf = false;
     }
 
+    public PlayCarro(Carro car, Piloto driver, int pacafin, int afinsrestantes, int tempo, MotorMode modomotor, TPneus pneus, boolean DNF){
+        this.car = car;
+        this.driver = driver;
+        this.pacafin = pacafin;
+        this.afinsrestantes = afinsrestantes;
+        this.tempo = tempo;
+        this.modomotor = modomotor;
+        this.pneus = pneus;
+        this.dnf = DNF;
+    }
 
-     public int compareTo(Carro c)
-     {
+    public PlayCarro(PlayCarro c){
+        this.car = getCarro();
+        this.driver = getPiloto();
+        this.pacafin = getPacAfin();
+        this.afinsrestantes = getAfinsRestantes();
+        this.tempo = getTempo();
+        this.modomotor = getModoMotor();
+        this.pneus = getPneus();
+        this.dnf = getDNF();
+
+    }
+
+    // Gets e Sets
+    public Carro getCarro() {return this.car;}
+    public Piloto getPiloto() {return this.driver;}
+    public int getPacAfin() {return this.pacafin;}
+    public int getAfinsRestantes() {return this.afinsrestantes;}
+    public int getTempo() {return this.tempo;}
+    public MotorMode getModoMotor() {return this.modomotor;}
+    public TPneus getPneus() {return this.pneus;}
+    public boolean getDNF() {return this.dnf;}
+    public void setCarro(Carro car) {this.car = car;}
+    public void setPacAfin(int pacafin) {this.pacafin = pacafin;}
+    public void setAfinsRestantes(int afinsrestantes) {this.afinsrestantes = afinsrestantes;}
+    public void setTempo(int tempo) {this.tempo = tempo;}
+    public void setModoMotor (MotorMode modomotor) {this.modomotor = modomotor;}
+    public void setPneus (TPneus pneus) {this.pneus = pneus;}
+    public void setDNF (boolean dnf) {this.dnf = dnf;}
+
+    public int compareTo(PlayCarro c) {
      if(this.tempo < c.getTempo())
      return -1;
      if(this.tempo > c.getTempo())

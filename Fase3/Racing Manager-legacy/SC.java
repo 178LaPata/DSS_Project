@@ -16,9 +16,9 @@ public class SC extends Carro
         super();
     }
     
-    public SC(String marca, String modelo, int cilindrada, int potencia, Equipa e)
+    public SC(String marca, String modelo, int cilindrada, int potencia, int pac)
     {
-        super(marca,modelo,cilindrada,potencia,e,0);
+        super(marca,modelo,cilindrada,potencia,pac,0);
     }
     
     public SC(SC p)
@@ -31,20 +31,15 @@ public class SC extends Carro
         return new SC(this);
     }
     
-    public boolean DNF(int volta,int totalvoltas, int chuva)
+    public boolean DNF(int volta,int totalvoltas, int chuva, Piloto driver)
     {
        Random rand=new Random();
        int x=rand.nextInt(73);
-       Piloto p = null;
-       if(volta<totalvoltas/2)
-           p = super.getEquipa().getPiloto1();
-       else
-           p = super.getEquipa().getPiloto2();
        int qualidade;
        if(chuva == 1)
-            qualidade = p.getQualidadeChuva();
+            qualidade = driver.getCTS();
        else
-            qualidade = p.getQualidade();
+            qualidade = driver.getSVA();
        //no maximo fiabilidade de 70%
        int fiabilidade = (int)(qualidade*0.75) + (int)((super.getCilindrada()/10)*0.25);
        //System.out.println("Fiabilidade: "+fiabilidade);

@@ -1,10 +1,4 @@
 
-/**
- * Write a description of class Piloto here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 
 import java.io.Serializable;
 
@@ -68,12 +62,7 @@ public class Piloto implements Serializable
     {
         this.cts = q;
     }
-    
-    public void setPalmares(int p)
-    {
-        this.palmares = p;
-    }
-    
+
     //Metodos usuais
     public String toString()
     {
@@ -100,6 +89,6 @@ public class Piloto implements Serializable
         Piloto p = (Piloto) o;
         return (this.nome.equals(p.getNome()) && 
                 this.sva==p.getSVA() &&
-                this.cts==p.getCTS() &&
+                this.cts==p.getCTS());
     }
 }

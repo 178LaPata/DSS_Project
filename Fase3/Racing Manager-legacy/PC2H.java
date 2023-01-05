@@ -18,12 +18,12 @@ public class PC2H extends PC2 implements Hibrido
         this.motor_eletrico = 0;
     }
     
-    public PC2H(String marca, String modelo, int cilindrada, int potencia, Equipa e,int p_mecanica, int eletrico)
+    public PC2H(String marca, String modelo, int cilindrada, int potencia, int pac,int p_mecanica, int eletrico)
     {
-        super(marca,modelo,cilindrada,potencia,e,p_mecanica);
+        super(marca,modelo,cilindrada,potencia,pac,p_mecanica);
         this.motor_eletrico = eletrico;
     }
-    \
+
     public PC2H(PC2H p)
     {
         super(p);
@@ -51,7 +51,7 @@ public class PC2H extends PC2 implements Hibrido
        int x=rand.nextInt(85);
        int motorh = this.getPotenciaMotorEletrico()/20;
        //no maximo fiabilidade de 85%
-       int fiabilidade = super.getFiabilidade() + (super.getCilindrada()/1200) + (super.getPreparacaoMecaninca()/10);
+       int fiabilidade = super.getFiabilidade() + (super.getCilindrada()/1200) + (super.getPreparacaoMecanica()/10);
        return (x > (fiabilidade-motorh));
     }
     

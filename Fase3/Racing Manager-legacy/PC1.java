@@ -6,7 +6,6 @@
  * @version (a version number or a date)
  */
 
-import java.util.Map;
 import java.util.Random;
 
 public class PC1 extends Carro
@@ -16,9 +15,9 @@ public class PC1 extends Carro
         super();
     }
     
-    public PC1(String marca, String modelo, int cilindrada, int potencia, Equipa e)
+    public PC1(String marca, String modelo, int cilindrada, int potencia, int pac)
     {
-        super(marca,modelo,cilindrada,potencia,e,85);
+        super(marca,modelo,cilindrada,potencia,pac,85);
     }
     
     public PC1(PC1 p)

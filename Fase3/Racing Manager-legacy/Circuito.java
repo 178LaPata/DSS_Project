@@ -6,6 +6,8 @@
  * @version (a version number or a date)
  */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.Serializable;
@@ -14,48 +16,36 @@ public class Circuito implements Serializable
 {
     /* Variaveis instancia */
     private String nome;
-    private int distancia;
-    private int voltas;
-    //private long tempoMedio;
-    private Map<String,Long> temposMedios;
-    private long tempoDesvio;
-    private long tempoBox;
-    private Record record;
+    private float distancia;
+    private int numvoltas;
+    private List<CircuitoParte> turns;
+    private int curvas;
+    private int retas;
+    private int chicanes;
+
     
     /* Construtores */
     public Circuito()
     {
         this.nome = "";
         this.distancia = 0;
-        this.voltas = 0;
-        this.temposMedios = new HashMap<String, Long>();
-        this.tempoDesvio = 0;
-        this.tempoBox = 0;
-        this.record = null;
+        this.numvoltas = 0;
+        this.turns= new ArrayList<>();
+        this.curvas=0;
+        this.retas=0;
+        this.chicanes=0;
+
     }
     
-    public Circuito(String n,int d, int v, Map<String, Long> m, long ds, long b, Record r)
+    public Circuito(String n,float d, int v, List<CircuitoParte> cp, int cu, int ch, int r)
     {
         this.nome = n;
         this.distancia = d;
-        this.voltas = v;
-        HashMap<String,Long> aux = new HashMap<String, Long>();
-        if(m == null)
-        {
-            this.temposMedios = new HashMap<String, Long>();
-        }
-        else
-        {
-            for(String g : m.keySet())
-            {
-                aux.put(g, m.get(g));
-            }
-        }
-        this.temposMedios = aux;
-        this.tempoDesvio = ds;
-        this.tempoBox = b;
-        this.record = r.clone();
-
+        this.numvoltas = v;
+        this.turns = cp;
+        this.curvas = cu;
+        this.retas = r;
+        this.chicanes = ch;
     }
     
     public Circuito(Circuito c)
@@ -75,39 +65,11 @@ public class Circuito implements Serializable
         return this.nome;
     }
     
-    public int getDistancia()
-    {
-        return this.distancia;
-    }
+    public float getDistancia() {return this.distancia;}
     
     public int getVoltas()
     {
-        return this.voltas;
-    }
-    
-    public Map<String,Long> getTemposMedios()
-    {
-        HashMap<String,Long> aux = new HashMap<String, Long>();
-        for(String g : this.temposMedios.keySet())
-        {
-            aux.put(g, this.temposMedios.get(g));
-        }
-        return aux;
-    }
-    
-    public long getTempoDesvio()
-    {
-        return this.tempoDesvio;
-    }
-    
-    public long getTempoBox()
-    {
-        return this.tempoBox;
-    }
-    
-    public Record getRecord()
-    {
-        return this.record.clone();
+        return this.numvoltas;
     }
     
     public void setNome(String n)
@@ -122,27 +84,7 @@ public class Circuito implements Serializable
     
     public void setVoltas(int v)
     {
-        this.voltas = v;
-    }
-    
-    public void setTempoDesvio(long ds)
-    {
-        this.tempoDesvio = ds;
-    }
-    
-    public void setTempoBox(long b)
-    {
-        this.tempoBox = b;
-    }
-    
-    public void setRecord(Record r)
-    {
-        this.record = r.clone();
-    }
-    
-    public void setTempoMedio(String categoria, long tempo)
-    {
-        this.temposMedios.put(categoria, tempo);
+        this.numvoltas = v;
     }
     
     /* Metodos usuais */
@@ -156,11 +98,7 @@ public class Circuito implements Serializable
         StringBuilder sb = new StringBuilder();
         sb.append("\nNome: ");sb.append(this.nome);
         sb.append("\nDistancia: ");sb.append(this.distancia);
-        sb.append("\nNumero de voltas: ");sb.append(this.voltas);
-        //sb.append("\nTempo Medio: ");sb.append(TimeConverter.toTimeFormat(this.tempoMedio));
-        sb.append("\nDesvio Tempo: ");sb.append(TimeConverter.toTimeFormat(this.tempoDesvio));
-        sb.append("\nTempo Box: ");sb.append(TimeConverter.toTimeFormat(this.tempoBox));
-        sb.append("\nRecord: ");sb.append(this.record.toString());
+
         return sb.toString();
     }
     
