@@ -52,44 +52,67 @@ public class Circuito implements Serializable
     {
         this.nome = c.getNome();
         this.distancia = c.getDistancia();
-        this.voltas = c.getVoltas();
-        this.temposMedios = c.getTemposMedios();
+        this.numvoltas = c.getNumVoltas();
+        /* this.temposMedios = c.getTemposMedios();
         this.tempoDesvio = c.getTempoDesvio();
         this.tempoBox = c.getTempoBox();
-        this.record = c.getRecord();
+        this.record = c.getRecord(); */
+        this.curvas = c.getCurvas();
+        this.retas = c.getRetas();
+        this.chicanes = c.getChicanes();
     }
     
     /* Gets e Sets */
-    public String getNome()
-    {
+    public String getNome() {
         return this.nome;
     }
     
-    public float getDistancia() {return this.distancia;}
-    
-    public int getVoltas()
-    {
-        return this.numvoltas;
+    public float getDistancia() {
+        return this.distancia;
     }
     
-    public void setNome(String n)
-    {
+    public int getNumVoltas() {
+        return this.numvoltas;
+    }
+
+    public int getCurvas() {
+        return this.curvas;
+    }
+
+    public int getRetas() {
+        return this.retas;
+    }
+
+    public int getChicanes() {
+        return this.chicanes;
+    }
+
+    public void setNome(String n) {
         this.nome = n;
     }
     
-    public void setDistancia(int d)
-    {
+    public void setDistancia(int d) {
         this.distancia = d;
     }
     
-    public void setVoltas(int v)
-    {
+    public void setNumVoltas(int v) {
         this.numvoltas = v;
+    }
+
+    public void setCurvas(int cu) {
+        this.curvas = cu;
+    }
+
+    public void setRetas(int r) {
+        this.retas = r;
+    }
+
+    public void setChicanes(int ch) {
+        this.chicanes = ch;
     }
     
     /* Metodos usuais */
-    public Circuito clone()
-    {
+    public Circuito clone() {
         return new Circuito(this);
     }
     
@@ -113,11 +136,14 @@ public class Circuito implements Serializable
        Circuito c = (Circuito) o;
        return ( this.nome.equals(c.getNome()) &&
                 this.distancia == c.getDistancia() &&
-                this.voltas == c.getVoltas() &&
-                //this.tempoMedio == c.getTempoMedio() &&
+                this.numvoltas == c.getNumVoltas() &&
+                /*this.tempoMedio == c.getTempoMedio() &&
                 this.tempoDesvio == c.getTempoDesvio() &&
                 this.tempoBox == c.getTempoBox() &&
-                this.record.equals(c.getRecord()));
+                this.record.equals(c.getRecord()) &&*/
+                this.curvas == c.getCurvas() &&
+                this.retas == c.getRetas() &&
+                this.chicanes == c.getChicanes());
     }
     
 }
