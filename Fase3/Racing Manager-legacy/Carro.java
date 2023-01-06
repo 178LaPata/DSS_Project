@@ -13,6 +13,7 @@ public abstract class Carro implements Serializable {
     //Variaveis de instancia
     private String marca;
     private String modelo;
+    private String equipa;
     private int cilindrada;
     private int potencia;
     private int pac;
@@ -22,15 +23,17 @@ public abstract class Carro implements Serializable {
     public Carro() {
         this.marca = "";
         this.modelo = "";
+        this.equipa = "";
         this.cilindrada = 0;
         this.potencia = 0;
         this.pac = 0;
         this.fiabilidade = 0;
     }
 
-    public Carro(String marca, String modelo, int cilindrada, int pac, int potencia, int fiabilidade) {
+    public Carro(String marca, String modelo, String equipa,int cilindrada, int pac, int potencia, int fiabilidade) {
         this.marca = marca;
         this.modelo = modelo;
+        this.equipa = equipa;
         this.cilindrada = cilindrada;
         this.potencia = potencia;
         this.pac = pac;
@@ -40,8 +43,10 @@ public abstract class Carro implements Serializable {
     public Carro(Carro c) {
         this.marca = c.getMarca();
         this.modelo = c.getModelo();
+        this.equipa = c.getEquipa();
         this.cilindrada = c.getCilindrada();
         this.potencia = c.getPotencia();
+        this.pac = c.getPac();
         this.fiabilidade = c.getFiabilidade();
     }
 
@@ -53,6 +58,10 @@ public abstract class Carro implements Serializable {
 
     public String getModelo() {
         return this.modelo;
+    }
+
+    public String getEquipa() {
+        return this.equipa;
     }
 
     public int getCilindrada() {
@@ -67,6 +76,10 @@ public abstract class Carro implements Serializable {
         return this.fiabilidade;
     }
 
+    public int getPac() {
+        return this.pac;
+    }
+
     public void setMarca(String marca) {
         this.marca = marca;
     }
@@ -75,12 +88,20 @@ public abstract class Carro implements Serializable {
         this.modelo = modelo;
     }
 
+    public void setEquipa(String equipa) {
+        this.equipa = equipa;
+    }
+
     public void setCilindrada(int cilindrada) {
         this.cilindrada = cilindrada;
     }
 
     public void setPotencia(int potencia) {
         this.potencia = potencia;
+    }
+
+    public void setPac(int pac) {
+        this.pac = pac;
     }
 
     /* Metodos usuais */
@@ -92,12 +113,16 @@ public abstract class Carro implements Serializable {
         sb.append(this.marca);
         sb.append("\nModelo: ");
         sb.append(this.modelo);
+        sb.append("\nEquipa: ");
+        sb.append(this.equipa);
         sb.append("\nCilindrada: ");
         sb.append(this.cilindrada);
         sb.append("\nPotencia: ");
         sb.append(this.potencia);
         sb.append("\nFiabiliade: ");
         sb.append(this.fiabilidade);
+        sb.append("\nPAC: ");
+        sb.append(this.pac);
         return sb.toString();
     }
 
@@ -111,8 +136,10 @@ public abstract class Carro implements Serializable {
         Carro c = (Carro) o;
         return (this.marca.equals(c.getMarca()) &&
                 this.modelo.equals(c.getModelo()) &&
+                this.equipa.equals(c.getEquipa()) && 
                 this.cilindrada == c.getCilindrada() &&
                 this.potencia == c.getPotencia() &&
-                this.fiabilidade == c.getFiabilidade());
+                this.fiabilidade == c.getFiabilidade() &&
+                this.pac == c.getPac());
     }
 }
