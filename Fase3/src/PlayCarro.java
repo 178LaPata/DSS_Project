@@ -51,21 +51,69 @@ public class PlayCarro implements Comparable<PlayCarro>{
     }
 
     // Gets e Sets
-    public Carro getCarro() {return this.car;}
-    public Piloto getPiloto() {return this.driver;}
-    public int getPacAfin() {return this.pacafin;}
-    public int getAfinsRestantes() {return this.afinsrestantes;}
-    public int getTempo() {return this.tempo;}
-    public MotorMode getModoMotor() {return this.modomotor;}
-    public TPneus getPneus() {return this.pneus;}
-    public boolean getDNF() {return this.dnf;}
-    public void setCarro(Carro car) {this.car = car;}
-    public void setPacAfin(int pacafin) {this.pacafin = pacafin;}
-    public void setAfinsRestantes(int afinsrestantes) {this.afinsrestantes = afinsrestantes;}
-    public void setTempo(int tempo) {this.tempo = tempo;}
-    public void setModoMotor (MotorMode modomotor) {this.modomotor = modomotor;}
-    public void setPneus (TPneus pneus) {this.pneus = pneus;}
-    public void setDNF (boolean dnf) {this.dnf = dnf;}
+    public Carro getCarro() 
+    {
+        return this.car;
+    }
+
+    public Piloto getPiloto() 
+    {
+        return this.driver;
+    }
+
+    public int getPacAfin() 
+    {
+        return this.pacafin;
+    }
+
+    public int getAfinsRestantes() 
+    {
+        return this.afinsrestantes;
+    }
+
+    public int getTempo() {
+        return this.tempo;
+    }
+
+    public MotorMode getModoMotor() {
+        return this.modomotor;
+    }
+
+    public TPneus getPneus() {
+        return this.pneus;
+    }
+
+    public boolean getDNF() {
+        return this.dnf;
+    }
+
+    public void setCarro(Carro car) {
+        this.car = car;
+    }
+
+    public void setPacAfin(int pacafin) {
+        this.pacafin = pacafin;
+    }
+
+    public void setAfinsRestantes(int afinsrestantes) {
+        this.afinsrestantes = afinsrestantes;
+    }
+
+    public void setTempo(int tempo) {
+        this.tempo = tempo;
+    }
+
+    public void setModoMotor (MotorMode modomotor) {
+        this.modomotor = modomotor;
+    }
+
+    public void setPneus (TPneus pneus) {
+        this.pneus = pneus;
+    }
+
+    public void setDNF (boolean dnf) {
+        this.dnf = dnf;
+    }
 
     public int compareTo(PlayCarro c) {
      if(this.tempo < c.getTempo())
