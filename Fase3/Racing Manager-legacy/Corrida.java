@@ -88,8 +88,7 @@ public class Corrida implements Serializable
        return aux;
    }
    
-   public Circuito getCircuito()
-   {
+   public Circuito getCircuito() {
        return this.circuito.clone();
    }
    
@@ -191,7 +190,7 @@ public class Corrida implements Serializable
      */   
     public void simulaCorrida()
     {
-        int voltas = this.circuito.getVoltas();
+        int voltas = this.circuito.getNumVoltas();
         long t_aux, t_volta;
         ArrayList<Carro> aux = new ArrayList<Carro>();
         HashMap<Carro,Integer> temp = new HashMap<Carro,Integer>();
@@ -225,7 +224,7 @@ public class Corrida implements Serializable
                        //atualizar record
                        if(this.circuito.getRecord().getTempo() > t_volta)
                        {
-                           if(i<(this.circuito.getVoltas()/2))
+                           if(i<(this.circuito.getNumVoltas()/2))
                            {
                                 Record r = new Record(t_volta,c.getEquipa().getPiloto1(),c.clone());
                                 this.circuito.setRecord(r);
@@ -307,7 +306,7 @@ public class Corrida implements Serializable
        StringBuilder sb = new StringBuilder();
        int i = 1;
        sb.append("\n||||| ");sb.append(this.circuito.getNome());sb.append(" |||||");
-       sb.append("\n||||| ");sb.append("Voltas: ");sb.append(this.circuito.getVoltas());sb.append(" |||||");
+       sb.append("\n||||| ");sb.append("Voltas: ");sb.append(this.circuito.getNumVoltas());sb.append(" |||||");
        sb.append("\n||||| ");sb.append("Distancia: ");sb.append(this.circuito.getDistancia());sb.append("km | ");
        sb.append("Condição meteorológica: ");
        if(this.clima == 0)
@@ -336,7 +335,7 @@ public class Corrida implements Serializable
             sb.append("\t Equipa: ");sb.append(c.getEquipa().getNome());
             i++;
        }      
-       for(int v=this.circuito.getVoltas();v>=0;v--)
+       for(int v=this.circuito.getNumVoltas();v>=0;v--)
        {
            for(Carro c : this.dnf.keySet())
            {
@@ -370,7 +369,7 @@ public class Corrida implements Serializable
             i++;
             }
        }      
-       for(int v=this.circuito.getVoltas();v>=0;v--)
+       for(int v=this.circuito.getNumVoltas();v>=0;v--)
        {
            for(Carro c : this.dnf.keySet())
            {
