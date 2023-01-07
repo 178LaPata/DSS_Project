@@ -7,11 +7,6 @@ package Jogo.Extra;
  * @version (a version number or a date)
  */
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.Set;
 import java.io.Serializable;
 
 public class Jogador implements Serializable {

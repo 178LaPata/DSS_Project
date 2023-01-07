@@ -37,7 +37,6 @@ public class Corrida implements Serializable
        this.listaCarros = new ArrayList<PlayCarro>();
        this.circuito = new Circuito();
        this.resultados = new TreeSet<PlayCarro>();
-       //this.bestLap = new HashMap<Carro,Long>();
        this.primeiroVolta = new ArrayList<PlayCarro>();
        this.dnf = new HashMap<PlayCarro,Integer>();
        Random rand=new Random();
@@ -214,6 +213,45 @@ public class Corrida implements Serializable
                 y = (90 > x*c1.getPiloto().getSVA());
         }
         return y;
+    }
+    /*
+    public void simulaCorrida(){
+        int voltas = this.circuito.getNumVoltas();
+        ArrayList<CircuitoParte> turns = new ArrayList<CircuitoParte>();
+        ArrayList<PlayCarro> aux = new ArrayList<PlayCarro>();
+        HashMap<PlayCarro,Integer> temp = new HashMap<PlayCarro,Integer>();
+        for (CircuitoParte cp: this.circuito.getTurns()){
+            turns.add(cp.clone());
+        }
+        for(PlayCarro c : this.listaCarros)
+        {
+            aux.add(c.clone());
+        }
+        for(int i=0; i<voltas; i++){
+            for(PlayCarro c : aux)
+            {
+                if(!c.getDNF()) //verifica se o carro esta acidentado
+                {
+                    if (c.getCarro() instanceof SC) {
+                        if (c.getCarro().DNF(i, voltas, this.clima, c.getModoMotor(), c.getPiloto())) {
+                            c.setDNF(true);
+                            temp.put(c.clone(), i);
+                        }
+                    }
+                    if (c.getCarro().DNF(i, voltas, this.clima, c.getModoMotor())) //verifica se o carro tem acidente na volta
+                    {
+                        c.setDNF(true);
+                        temp.put(c.clone(), i);
+                    }
+                    else
+                    {
+                        for (CircuitoParte cp : turns){
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

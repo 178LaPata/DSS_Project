@@ -8,7 +8,6 @@ import Jogo.Extra.*;
  * @version (a version number or a date)
  */
 
-import java.util.Map;
 import java.util.Random;
 
 public class SC extends Carro
@@ -43,7 +42,7 @@ public class SC extends Carro
         }
        Random rand=new Random();
        int x=rand.nextInt(73);
-       int qualidade;
+       float qualidade;
        if(clima == 1)
             qualidade = driver.getCTS();
        else

@@ -16,7 +16,7 @@ public abstract class Carro implements Serializable {
     private String modelo;
     private int cilindrada;
     private int potencia;
-    private int pac;
+    private float pac;
     private int fiabilidade;
 
     /* Construtores */
@@ -69,7 +69,7 @@ public abstract class Carro implements Serializable {
         return this.fiabilidade;
     }
 
-    public int getPac() {
+    public float getPac() {
         return this.pac;
     }
 

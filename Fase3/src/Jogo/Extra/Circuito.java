@@ -98,6 +98,13 @@ public class Circuito implements Serializable
         return this.tempoDesvio;
     }
 
+    public List<CircuitoParte> getTurns(){
+        ArrayList<CircuitoParte> aux = new ArrayList<CircuitoParte>();
+        for(CircuitoParte cp: this.turns){
+            aux.add(cp.clone());
+        }
+        return aux;
+    }
 
     public int getRetas() {
         return this.retas;
