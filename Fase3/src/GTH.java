@@ -45,15 +45,21 @@ public class GTH extends GT implements Hibrido
         this.motor_eletrico = potencia;
     }
     
-    public boolean DNF(int volta,int totalvoltas,int clima)
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM)
     {
+        double degMM=0;
+        switch (modoM){
+            case Conservador -> degMM=0.5;
+            case Normal -> degMM=1;
+            case Agressivo -> degMM=2;
+        }
        Random rand=new Random();
        int x=rand.nextInt(70);
        int motorh = this.getPotenciaMotorEletrico()/20; 
        //no maximo fiabilidade de 85%
        // 3000 cilindrada = 85% / 4500 cilindrada = 57%
        int fiabilidade = (int)((100000/super.getCilindrada())*2.55);
-       int desgaste = (int)((volta+1)*0.5); //0.5% a cada volta
+       int desgaste = (int)((volta+1)*0.5*degMM); //0.5% a cada volta
        return (x > (fiabilidade - desgaste - motorh));
     }
     

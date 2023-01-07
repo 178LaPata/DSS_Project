@@ -45,13 +45,19 @@ public class PC2H extends PC2 implements Hibrido
         this.motor_eletrico = e; 
     }
     
-    public boolean DNF(int volta,int totalvoltas,int clima)
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM)
     {
+        double degMM=0;
+        switch (modoM){
+            case Conservador -> degMM=2;
+            case Normal -> degMM=1;
+            case Agressivo -> degMM=0.5;
+        }
        Random rand=new Random();
        int x=rand.nextInt(85);
        int motorh = this.getPotenciaMotorEletrico()/20;
        //no maximo fiabilidade de 85%
-       int fiabilidade = super.getFiabilidade() + (super.getCilindrada()/1200) + (super.getPreparacaoMecanica()/10);
+       int fiabilidade = (int) (super.getFiabilidade() + (super.getCilindrada()/1200) + (super.getPreparacaoMecanica()/10)* degMM);
        return (x > (fiabilidade-motorh));
     }
     

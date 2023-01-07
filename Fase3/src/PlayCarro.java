@@ -136,21 +136,42 @@ public class PlayCarro implements Comparable<PlayCarro>{
      */
     public long tempoProximaVolta(Circuito c, int clima, int volta)
     {
-        Piloto p1 = this.getPiloto();
         Map<String,Long> aux = c.getTemposMedios();
         long t_medio = aux.get(this.getClass().getName());
         long t_chuva = c.getTempoDesvio();
         long minimum = 0;
+        double mmBoost=0;
         long maximum = 5000;
         long fator_sorte = minimum + Double.valueOf(Math.random()*(maximum-minimum)).intValue();
         long maximum_chuva = 2000;
         long fator_sorte_chuva= minimum + Double.valueOf(Math.random()*(maximum_chuva-minimum)).intValue();
-        if(this.car instanceof Hibrido){
-            return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())+(this.car.getCilindrada()/((Hibrido) this.car).getPotenciaMotorEletrico())-this.driver.getSVA())* 1000L) - fator_sorte
-                    + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva;
+        if (this.pneus == TPneus.Macio && clima==0){
+            fator_sorte = fator_sorte * (50-volta)/25;
         }
-        else return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())-this.driver.getSVA())* 1000L) - fator_sorte
-                    + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva;
+        if (this.pneus == TPneus.Duro && clima==0){
+            fator_sorte = fator_sorte * (80-volta)/40;
+        }
+        if (this.pneus == TPneus.Chuva && clima==0){
+            fator_sorte = fator_sorte/2 * (20-volta)/10;
+        }
+        if (this.pneus == TPneus.Macio || this.pneus == TPneus.Duro && clima==1){
+            clima=clima*3;
+            fator_sorte_chuva = fator_sorte_chuva/5;
+        }
+        if (this.pneus == TPneus.Chuva && clima==1){
+            fator_sorte_chuva = fator_sorte_chuva * (60-volta/30);
+        }
+        switch (this.modomotor){
+            case Normal -> mmBoost=1;
+            case Conservador -> mmBoost=0.75;
+            case Agressivo -> mmBoost=1.5;
+        }
+        if(this.car instanceof Hibrido){
+            return (long) ((t_medio + ((this.car.getCilindrada()/this.car.getPotencia())+(this.car.getCilindrada()/((Hibrido) this.car).getPotenciaMotorEletrico())-this.driver.getSVA())* 1000L) - mmBoost*fator_sorte
+                                + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva);
+        }
+        else return (long) ((t_medio + ((this.car.getCilindrada()/this.car.getPotencia())-this.driver.getSVA())* 1000L) - mmBoost*fator_sorte
+                            + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva);
 
 
     }

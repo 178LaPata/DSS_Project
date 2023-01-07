@@ -45,11 +45,17 @@ public class PC1H extends PC1 implements Hibrido
         this.motor_eletrico = potencia;
     }
     
-    public boolean DNF(int volta,int totalvoltas,int clima)
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM)
     {
+        double degMM=0;
+        switch (modoM){
+            case Conservador -> degMM=0.5;
+            case Normal -> degMM=1;
+            case Agressivo -> degMM=2;
+        }
        Random rand=new Random();
        int x=rand.nextInt(85);
-       int motorh = this.getPotenciaMotorEletrico()/20;     
+       int motorh = (int) ((this.getPotenciaMotorEletrico()/20)*degMM);
        return (x > (super.getFiabilidade()-motorh));
        //return false;
     }

@@ -39,16 +39,22 @@ public class PC2 extends Carro
         return new PC2(this);
     }
     
-    public boolean DNF(int volta,int totalvoltas,int clima)
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM)
     {
+        double degMM=0;
+        switch (modoM){
+            case Conservador -> degMM=2;
+            case Normal -> degMM=1;
+            case Agressivo -> degMM=0.5;
+        }
        Random rand=new Random();
        int x=rand.nextInt(85);
        //no maximo fiabilidade de 85%
-       int fiabilidade = super.getFiabilidade() + (super.getCilindrada()/1200) + (this.preparacao_mecanica/10);
+       int fiabilidade = (int) (super.getFiabilidade() + (super.getCilindrada()/1200) + (this.preparacao_mecanica/10)*degMM);
        return (x > fiabilidade);
     }
 
-    public boolean DNF(int volta, int totalvoltas, int clima, Piloto p) {
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM,Piloto p) {
         return false;
     }
 

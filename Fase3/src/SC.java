@@ -31,19 +31,23 @@ public class SC extends Carro
         return new SC(this);
     }
     
-    public boolean DNF(int volta,int totalvoltas, int chuva, Piloto driver)
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM,Piloto driver)
     {
+        double degMM=0;
+        switch (modoM){
+            case Conservador -> degMM=2;
+            case Normal -> degMM=1;
+            case Agressivo -> degMM=0.5;
+        }
        Random rand=new Random();
        int x=rand.nextInt(73);
        int qualidade;
-       if(chuva == 1)
+       if(clima == 1)
             qualidade = driver.getCTS();
        else
             qualidade = driver.getSVA();
        //no maximo fiabilidade de 70%
-       int fiabilidade = (int)(qualidade*0.75) + (int)((super.getCilindrada()/10)*0.25);
-       //System.out.println("Fiabilidade: "+fiabilidade);
-       //System.out.println("Random: "+x);
+       int fiabilidade = (int)(qualidade*0.75) + (int)((super.getCilindrada()/10)*0.25*degMM);
        return (x > fiabilidade);
     }    
      
@@ -59,7 +63,7 @@ public class SC extends Carro
         return ( super.equals(c));
     }
 
-    public boolean DNF(int volta, int totalvoltas, int clima) {
+    public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM) {
         return false;
     }
 }
