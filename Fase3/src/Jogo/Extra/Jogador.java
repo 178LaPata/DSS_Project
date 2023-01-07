@@ -1,4 +1,5 @@
 package Jogo.Extra;
+import Jogo.Carro.*;
 
 /**
  * Write a description of class Jogador here.

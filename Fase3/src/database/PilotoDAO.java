@@ -1,8 +1,15 @@
 package database;
-import Piloto;
+import Jogo.Extra.Piloto;
 
 public class PilotoDAO {
-    public Carro get() {
+    public Piloto get() {
+        Piloto p = null;
+        try (Connection conn = 
+                    DriverManager.getConnection(DAOconfig.URL+DAOconfig.CREDENTIALS);
+            Statement stm = conn.createStatement();
+            
+                    
+                )
 
     }
 

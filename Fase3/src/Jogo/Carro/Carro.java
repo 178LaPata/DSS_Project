@@ -1,4 +1,5 @@
 package Jogo.Carro;
+import Jogo.Extra.*;
 
 /**
  * Write a description of class Carro here.

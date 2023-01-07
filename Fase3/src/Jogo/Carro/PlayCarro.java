@@ -1,4 +1,5 @@
 package Jogo.Carro;
+import Jogo.Extra.*;
 
 import java.util.Map;
 
