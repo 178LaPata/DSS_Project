@@ -126,4 +126,10 @@ public abstract class Carro implements Serializable {
                 this.fiabilidade == c.getFiabilidade() &&
                 this.pac == c.getPac());
     }
+
+    public abstract boolean DNF(int volta,int totalvoltas,int clima);
+
+    public abstract boolean DNF(int volta,int totalvoltas,int clima, Piloto p);
 }
+
+

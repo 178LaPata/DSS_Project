@@ -42,8 +42,12 @@ public class GT extends Carro
        int desgaste = (int)((volta+1)*0.5); //0.5% a cada volta
        return (x > (fiabilidade - desgaste));
     }
-    
-     
+
+    public boolean DNF(int volta, int totalvoltas, int clima, Piloto p) {
+        return false;
+    }
+
+
     public boolean equals(Object o)
     {
         if(this==o)

@@ -53,7 +53,7 @@ public class PC1H extends PC1 implements Hibrido
        return (x > (super.getFiabilidade()-motorh));
        //return false;
     }
-    
+
     public boolean equals(Object o)
     {
         if(this==o)
