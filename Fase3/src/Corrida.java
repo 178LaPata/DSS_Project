@@ -22,42 +22,41 @@ import java.io.Serializable;
 public class Corrida implements Serializable
 {
    //variaveis de instancia
-   private List<Carro> listaCarros;
+   private List<PlayCarro> listaCarros;
    private Circuito circuito;
-   private Set<Carro> resultados;
-   //private Map<Carro,Long> bestLap;
-   private List<Carro> primeiroVolta;
-   private Map<Carro, Integer> dnf;
+   private Set<PlayCarro> resultados;
+   private List<PlayCarro> primeiroVolta;
+   private Map<PlayCarro, Integer> dnf;
    private int clima; //1-chove 0-sol
    
    //Construtores
    public Corrida()
    {
-       this.listaCarros = new ArrayList<Carro>();
+       this.listaCarros = new ArrayList<PlayCarro>();
        this.circuito = new Circuito();
-       this.resultados = new TreeSet<Carro>();
+       this.resultados = new TreeSet<PlayCarro>();
        //this.bestLap = new HashMap<Carro,Long>();
-       this.primeiroVolta = new ArrayList<Carro>();
-       this.dnf = new HashMap<Carro,Integer>();
+       this.primeiroVolta = new ArrayList<PlayCarro>();
+       this.dnf = new HashMap<PlayCarro,Integer>();
        Random rand=new Random();
        int x=rand.nextInt(2);
        this.clima = x;
    }
    
    
-   public Corrida(List<Carro> l, Circuito c, Set<Carro> r, List<Carro> p, int clima)
+   public Corrida(List<PlayCarro> l, Circuito c, Set<PlayCarro> r, List<PlayCarro> p, int clima)
    {
        this();
-       for(Carro car: l)
+       for(PlayCarro car: l)
        {
            this.listaCarros.add(car);
        }
        this.circuito = c.clone();
-       for(Carro car: r)
+       for(PlayCarro car: r)
        {
            this.resultados.add(car.clone());
        }
-       for(Carro x : p)
+       for(PlayCarro x : p)
        {
            this.primeiroVolta.add(x.clone());
        }
@@ -78,10 +77,10 @@ public class Corrida implements Serializable
    
    
    //Gets e sets
-   public List<Carro> getCarros()
+   public List<PlayCarro> getCarros()
    {
-       ArrayList<Carro> aux = new ArrayList<Carro>();
-       for(Carro c: this.listaCarros)
+       ArrayList<PlayCarro> aux = new ArrayList<PlayCarro>();
+       for(PlayCarro c: this.listaCarros)
        {
            aux.add(c.clone());
        }
@@ -93,20 +92,20 @@ public class Corrida implements Serializable
    }
    
    
-   public Set<Carro> getResultados()
+   public Set<PlayCarro> getResultados()
    {
-       TreeSet<Carro> aux = new TreeSet<Carro>();
-       for(Carro c : this.resultados)
+       TreeSet<PlayCarro> aux = new TreeSet<PlayCarro>();
+       for(PlayCarro c : this.resultados)
        {
            aux.add(c.clone());
        }
        return aux;
    }
    
-   public Map<Carro,Integer> getDNF()
+   public Map<PlayCarro,Integer> getDNF()
    {
-       HashMap<Carro,Integer> aux = new HashMap<Carro,Integer>();
-       for(Carro c : this.dnf.keySet())
+       HashMap<PlayCarro,Integer> aux = new HashMap<PlayCarro,Integer>();
+       for(PlayCarro c : this.dnf.keySet())
        {
            aux.put(c.clone(), this.dnf.get(c));
         }
@@ -119,10 +118,10 @@ public class Corrida implements Serializable
    }
    
    
-   public List<Carro> getPrimeiroVolta()
+   public List<PlayCarro> getPrimeiroVolta()
    {
-       ArrayList<Carro> aux = new ArrayList<Carro>();
-       for(Carro c : this.primeiroVolta)
+       ArrayList<PlayCarro> aux = new ArrayList<PlayCarro>();
+       for(PlayCarro c : this.primeiroVolta)
        {
            aux.add(c.clone());
        }
@@ -146,7 +145,7 @@ public class Corrida implements Serializable
    /**
      * Adicionar um carro á lista
      */
-    public void adicionarCarro(Carro c)
+    public void adicionarCarro(PlayCarro c)
     {
         this.listaCarros.add(c.clone());
     }
@@ -154,9 +153,9 @@ public class Corrida implements Serializable
     /**
      * adicionar lista de carros
      */
-    public void adicionarCarro(List<Carro> l)
+    public void adicionarCarro(List<PlayCarro> l)
     {
-        for(Carro c : l)
+        for(PlayCarro c : l)
         {
             this.listaCarros.add(c.clone());
         }
@@ -173,7 +172,7 @@ public class Corrida implements Serializable
     /**
      * Remover um carro
      */
-    public void removerCarro(Carro c)
+    public void removerCarro(PlayCarro c)
     {
         this.listaCarros.remove(c);
     }
@@ -193,19 +192,19 @@ public class Corrida implements Serializable
     {
         int voltas = this.circuito.getNumVoltas();
         long t_aux, t_volta;
-        ArrayList<Carro> aux = new ArrayList<Carro>();
-        HashMap<Carro,Integer> temp = new HashMap<Carro,Integer>();
-        for(Carro c : this.listaCarros)
+        ArrayList<PlayCarro> aux = new ArrayList<PlayCarro>();
+        HashMap<PlayCarro,Integer> temp = new HashMap<PlayCarro,Integer>();
+        for(PlayCarro c : this.listaCarros)
         {
             aux.add(c.clone());
         }
         for(int i=0; i<voltas; i++)
         {
-            for(Carro c : aux)
+            for(PlayCarro c : aux)
             {
-                if(c.getDNF()==false) //verifica se o carro esta acidentado
+                if(!c.getDNF()) //verifica se o carro esta acidentado
                 {
-                    if(c.DNF(i,voltas,this.clima)==true) //verifica se o carro tem acidente na volta
+                    if(c.getCarro().DNF(i, voltas, this.clima)) //verifica se o carro tem acidente na volta
                     {
                         c.setDNF(true);
                         temp.put(c.clone(),i);
@@ -223,27 +222,14 @@ public class Corrida implements Serializable
                             t_volta = c.tempoProximaVolta(this.circuito, 0, i);
                        c.setTempo(t_aux +t_volta); 
                        //atualizar record
-                       if(this.circuito.getRecord().getTempo() > t_volta)
-                       {
-                           if(i<(this.circuito.getNumVoltas()/2))
-                           {
-                                Record r = new Record(t_volta,c.getEquipa().getPiloto1(),c.clone());
-                                this.circuito.setRecord(r);
-                           }
-                           else
-                           {
-                               Record r = new Record(t_volta,c.getEquipa().getPiloto2(),c.clone());
-                               this.circuito.setRecord(r);
-                           }
-                       }
                     }
                 }
             }
             this.primeiroVolta(i,aux); //metodo auxiliar para determinar o 1º a cada volta
         }
-        for(Carro c : aux)
+        for(PlayCarro c : aux)
         {
-            if(c.getDNF()==false)
+            if(!c.getDNF())
             {
                     this.resultados.add(c);
             }
@@ -254,16 +240,16 @@ public class Corrida implements Serializable
     /**
      * Metodo auxiliar privado para determinar o carro que vai em 1o a cada volta
      */
-    private void primeiroVolta(int volta, List<Carro> l)
+    private void primeiroVolta(int volta, List<PlayCarro> l)
     {
        Collections.sort(l);
-       Iterator<Carro> it = l.iterator();
+       Iterator<PlayCarro> it = l.iterator();
        boolean f = false;
-       Carro c = null;
-       while(it.hasNext() && f==false)
+       PlayCarro c = null;
+       while(it.hasNext() && !f)
        {
            c = it.next();
-           if(c.getDNF()==false)
+           if(!c.getDNF())
                 f=true;
        }
        if(c!=null)
@@ -282,17 +268,17 @@ public class Corrida implements Serializable
         {
             sb.append("\n");
             sb.append(i+1);sb.append("ª Volta: ");
-            sb.append(this.primeiroVolta.get(i).getMarca());sb.append(" ");
-            sb.append(this.primeiroVolta.get(i).getModelo());sb.append(" ");
-            sb.append(this.primeiroVolta.get(i).getEquipa().getNome());
-            for(Carro c : this.dnf.keySet())
+            sb.append(this.primeiroVolta.get(i).getCarro().getMarca());sb.append(" ");
+            sb.append(this.primeiroVolta.get(i).getCarro().getModelo());sb.append(" ");
+            sb.append(this.primeiroVolta.get(i).getPiloto().getNome());
+            for(PlayCarro c : this.dnf.keySet())
             {
                 if(this.dnf.get(c) == i)
                 {
                     sb.append("\n\t");sb.append("Desistente: ");
-                    sb.append(c.getMarca());sb.append(" ");
-                    sb.append(c.getModelo());sb.append(" ");
-                    sb.append(c.getEquipa().getNome());
+                    sb.append(c.getCarro().getMarca());sb.append(" ");
+                    sb.append(c.getCarro().getModelo());sb.append(" ");
+                    sb.append(c.getPiloto().getNome());
                 }
             }
         }
@@ -319,26 +305,21 @@ public class Corrida implements Serializable
             sb.append("Chuva");;
         }
        sb.append(" |||||");
-       sb.append("\n||||| ");sb.append("Record: ");sb.append(TimeConverter.toTimeFormat(this.circuito.getRecord().getTempo()));
-       sb.append(" | Piloto: ");sb.append(this.circuito.getRecord().getPiloto().getNome());
-       sb.append(" Carro: ");sb.append(this.circuito.getRecord().getCarro().getMarca());
-       sb.append(" ");sb.append(this.circuito.getRecord().getCarro().getModelo());
-       sb.append(" Equipa: ");sb.append(this.circuito.getRecord().getCarro().getEquipa().getNome());
        sb.append("\n\n||||| Classificacoes da corrida |||||");
-       for(Carro c : this.resultados)
+       for(PlayCarro c : this.resultados)
        {
             sb.append("\n");
             sb.append(i);sb.append("º: ");
             sb.append(TimeConverter.toTimeFormat(c.getTempo()));
             sb.append("\t Categoria: "); sb.append(c.getClass().getName()); sb.append(" ");
-            sb.append("\t Carro: "); sb.append(c.getMarca()); sb.append(" ");
-            sb.append(c.getModelo());
-            sb.append("\t Equipa: ");sb.append(c.getEquipa().getNome());
+            sb.append("\t Carro: "); sb.append(c.getCarro().getMarca()); sb.append(" ");
+            sb.append(c.getCarro().getModelo());
+            sb.append("\t Piloto: ");sb.append(c.getPiloto().getNome());
             i++;
        }      
        for(int v=this.circuito.getNumVoltas();v>=0;v--)
        {
-           for(Carro c : this.dnf.keySet())
+           for(PlayCarro c : this.dnf.keySet())
            {
                    if(v==this.dnf.get(c))
                    {
@@ -346,9 +327,9 @@ public class Corrida implements Serializable
                    sb.append(i);sb.append("º: ");
                    sb.append("DNF");
                    sb.append("\t Categoria: "); sb.append(c.getClass().getName()); sb.append(" ");
-                   sb.append("\t Carro: "); sb.append(c.getMarca()); sb.append(" ");
-                   sb.append(c.getModelo());
-                   sb.append("\t Equipa: ");sb.append(c.getEquipa().getNome());
+                   sb.append("\t Carro: "); sb.append(c.getCarro().getMarca()); sb.append(" ");
+                   sb.append(c.getCarro().getModelo());
+                   sb.append("\t Piloto: ");sb.append(c.getPiloto().getNome());
                    i++;
                 }
            }
@@ -356,7 +337,7 @@ public class Corrida implements Serializable
        
        sb.append("\n\n||||| Classificacoes da corrida Hibridos |||||");
        i=1;
-       for(Carro c : this.resultados)
+       for(PlayCarro c : this.resultados)
        {
             if(c instanceof Hibrido)
             {
@@ -364,15 +345,15 @@ public class Corrida implements Serializable
             sb.append(i);sb.append("º: ");
             sb.append(TimeConverter.toTimeFormat(c.getTempo()));
             sb.append("\t Categoria: "); sb.append(c.getClass().getName()); sb.append(" ");
-            sb.append("\t Carro: "); sb.append(c.getMarca()); sb.append(" ");
-            sb.append(c.getModelo());
-            sb.append("\t Equipa: ");sb.append(c.getEquipa().getNome());
+            sb.append("\t Carro: "); sb.append(c.getCarro().getMarca()); sb.append(" ");
+            sb.append(c.getCarro().getModelo());
+            sb.append("\t Piloto: ");sb.append(c.getPiloto().getNome());
             i++;
             }
        }      
        for(int v=this.circuito.getNumVoltas();v>=0;v--)
        {
-           for(Carro c : this.dnf.keySet())
+           for(PlayCarro c : this.dnf.keySet())
            {
                if(c instanceof Hibrido)
                {
@@ -382,9 +363,9 @@ public class Corrida implements Serializable
                    sb.append(i);sb.append("º: ");
                    sb.append("DNF");
                    sb.append("\t Categoria: "); sb.append(c.getClass().getName()); sb.append(" ");
-                   sb.append("\t Carro: "); sb.append(c.getMarca()); sb.append(" ");
-                   sb.append(c.getModelo());
-                   sb.append("\t Equipa: ");sb.append(c.getEquipa().getNome());
+                   sb.append("\t Carro: "); sb.append(c.getCarro().getMarca()); sb.append(" ");
+                   sb.append(c.getCarro().getModelo());
+                   sb.append("\t Piloto: ");sb.append(c.getPiloto().getNome());
                    i++;
                 }
                }
@@ -401,9 +382,9 @@ public class Corrida implements Serializable
    {
        StringBuilder sb = new StringBuilder();
        sb.append("Espetados!!!");
-       for(Carro c : this.dnf.keySet())
+       for(PlayCarro c : this.dnf.keySet())
        {
-           sb.append("\n" + c.getMarca() + " \t\tVolta: " + this.dnf.get(c));
+           sb.append("\n").append(c.getCarro().getMarca()).append(" \t\tVolta: ").append(this.dnf.get(c));
        }
        return sb.toString();
    }
@@ -415,11 +396,11 @@ public class Corrida implements Serializable
    {
        StringBuilder sb = new StringBuilder();
        int i = 1;
-       for(Carro c : this.listaCarros)
+       for(PlayCarro c : this.listaCarros)
        {
            sb.append("\n");
-           sb.append(i);sb.append(" - ");sb.append(c.getMarca());sb.append(" ");sb.append(c.getModelo());
-           sb.append("\t ");sb.append(c.getEquipa().getNome());sb.append("\t ");sb.append(c.getClass().getName());
+           sb.append(i);sb.append(" - ");sb.append(c.getCarro().getMarca());sb.append(" ");sb.append(c.getCarro().getModelo());
+           sb.append("\t ");sb.append(c.getPiloto().getNome());sb.append("\t ");sb.append(c.getClass().getName());
            i++;
        }
        return sb.toString();

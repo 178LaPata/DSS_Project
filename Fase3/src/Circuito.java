@@ -18,6 +18,8 @@ public class Circuito implements Serializable
     private String nome;
     private float distancia;
     private int numvoltas;
+    private Map<String,Long> temposMedios;
+    private long tempoDesvio;
     private List<CircuitoParte> turns;
     private int curvas;
     private int retas;
@@ -30,6 +32,8 @@ public class Circuito implements Serializable
         this.nome = "";
         this.distancia = 0;
         this.numvoltas = 0;
+        this.temposMedios = new HashMap<String, Long>();
+        this.tempoDesvio = 0;
         this.turns= new ArrayList<>();
         this.curvas=0;
         this.retas=0;
@@ -37,11 +41,13 @@ public class Circuito implements Serializable
 
     }
     
-    public Circuito(String n,float d, int v, List<CircuitoParte> cp, int cu, int ch, int r)
+    public Circuito(String n,float d, int v,Map<String, Long> tm, int td, List<CircuitoParte> cp, int cu, int ch, int r)
     {
         this.nome = n;
         this.distancia = d;
         this.numvoltas = v;
+        this.temposMedios = tm;
+        this.tempoDesvio = td;
         this.turns = cp;
         this.curvas = cu;
         this.retas = r;
@@ -53,10 +59,8 @@ public class Circuito implements Serializable
         this.nome = c.getNome();
         this.distancia = c.getDistancia();
         this.numvoltas = c.getNumVoltas();
-        /* this.temposMedios = c.getTemposMedios();
+        this.temposMedios = c.getTemposMedios();
         this.tempoDesvio = c.getTempoDesvio();
-        this.tempoBox = c.getTempoBox();
-        this.record = c.getRecord(); */
         this.curvas = c.getCurvas();
         this.retas = c.getRetas();
         this.chicanes = c.getChicanes();
@@ -78,6 +82,21 @@ public class Circuito implements Serializable
     public int getCurvas() {
         return this.curvas;
     }
+
+    public Map<String,Long> getTemposMedios()
+    {
+        HashMap<String,Long> aux = new HashMap<String, Long>();
+        for(String g : this.temposMedios.keySet())
+        {
+            aux.put(g, this.temposMedios.get(g));
+        }
+        return aux;
+    }
+    public long getTempoDesvio()
+    {
+        return this.tempoDesvio;
+    }
+
 
     public int getRetas() {
         return this.retas;

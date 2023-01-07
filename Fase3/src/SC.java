@@ -58,4 +58,8 @@ public class SC extends Carro
         SC c = (SC) o;
         return ( super.equals(c));
     }
+
+    public boolean DNF(int volta, int totalvoltas, int clima) {
+        return false;
+    }
 }

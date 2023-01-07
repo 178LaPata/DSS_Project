@@ -47,7 +47,11 @@ public class PC2 extends Carro
        int fiabilidade = super.getFiabilidade() + (super.getCilindrada()/1200) + (this.preparacao_mecanica/10);
        return (x > fiabilidade);
     }
-    
+
+    public boolean DNF(int volta, int totalvoltas, int clima, Piloto p) {
+        return false;
+    }
+
     public boolean equals(Object o)
     {
         if(this==o)

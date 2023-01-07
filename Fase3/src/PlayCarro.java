@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public class PlayCarro implements Comparable<PlayCarro>{
     //Variáveis de instância
     private Carro car;
@@ -5,7 +7,7 @@ public class PlayCarro implements Comparable<PlayCarro>{
     private int pacafin;
     private boolean dnf;
     private int afinsrestantes;
-    private int tempo;
+    private long tempo;
     enum MotorMode {
         Normal, Agressivo, Conservador, Undefined
     }
@@ -27,7 +29,7 @@ public class PlayCarro implements Comparable<PlayCarro>{
         this.dnf = false;
     }
 
-    public PlayCarro(Carro car, Piloto driver, int pacafin, int afinsrestantes, int tempo, MotorMode modomotor, TPneus pneus, boolean DNF){
+    public PlayCarro(Carro car, Piloto driver, int pacafin, int afinsrestantes, long tempo, MotorMode modomotor, TPneus pneus, boolean DNF){
         this.car = car;
         this.driver = driver;
         this.pacafin = pacafin;
@@ -71,7 +73,7 @@ public class PlayCarro implements Comparable<PlayCarro>{
         return this.afinsrestantes;
     }
 
-    public int getTempo() {
+    public long getTempo() {
         return this.tempo;
     }
 
@@ -99,7 +101,7 @@ public class PlayCarro implements Comparable<PlayCarro>{
         this.afinsrestantes = afinsrestantes;
     }
 
-    public void setTempo(int tempo) {
+    public void setTempo(long tempo) {
         this.tempo = tempo;
     }
 
@@ -115,6 +117,10 @@ public class PlayCarro implements Comparable<PlayCarro>{
         this.dnf = dnf;
     }
 
+    public PlayCarro clone(){
+        return new PlayCarro(this);
+    }
+
     public int compareTo(PlayCarro c) {
      if(this.tempo < c.getTempo())
      return -1;
@@ -128,10 +134,9 @@ public class PlayCarro implements Comparable<PlayCarro>{
      /**
      * Tempo em milisegundos de uma volta
      */
-    /*public long tempoProximaVolta(Circuito c, int clima, int volta)
+    public long tempoProximaVolta(Circuito c, int clima, int volta)
     {
-        Piloto p1 = this.getEquipa().getPiloto1();
-        Piloto p2 = this.getEquipa().getPiloto2();
+        Piloto p1 = this.getPiloto();
         Map<String,Long> aux = c.getTemposMedios();
         long t_medio = aux.get(this.getClass().getName());
         long t_chuva = c.getTempoDesvio();
@@ -140,30 +145,10 @@ public class PlayCarro implements Comparable<PlayCarro>{
         long fator_sorte = minimum + Double.valueOf(Math.random()*(maximum-minimum)).intValue();
         long maximum_chuva = 2000;
         long fator_sorte_chuva= minimum + Double.valueOf(Math.random()*(maximum_chuva-minimum)).intValue();
+        return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())-this.driver.getSVA())* 1000L) - fator_sorte
+                    + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva;
 
-        if(volta<(c.getVoltas()/2))
-        {
-            /* usa piloto 1
-            return (t_medio + ((this.getCilindrada()/this.getPotencia())-p1.getQualidade())*1000) - fator_sorte
-                    + (clima*(t_chuva - p1.getQualidadeChuva()*1000)) - fator_sorte_chuva;
-        }
-        else
-        {
-            /*usa piloto 2
-            if(volta == (c.getVoltas()/2))
-            {
-                return (t_medio + ((this.getCilindrada()/this.getPotencia())-p2.getQualidade())*1000) - fator_sorte
-                    + (clima*(t_chuva - p2.getQualidadeChuva()*1000)) - fator_sorte_chuva + c.getTempoBox();
-            }
-            else
-            return (t_medio + ((this.getCilindrada()/this.getPotencia())-p2.getQualidade())*1000) - fator_sorte
-                    + (clima*(t_chuva - p2.getQualidadeChuva()*1000)) - fator_sorte_chuva;
-        }
+
     }
-    */
-    /**
-     * define se o carro desiste (true desiste, false continua em prova)
-    public  boolean DNF(int volta,int totalvoltas,int clima);
-    */
 }
 

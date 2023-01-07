@@ -37,7 +37,11 @@ public class PC1 extends Carro
        return (x > super.getFiabilidade());
        //return false;
     }
-    
+
+    public boolean DNF(int volta, int totalvoltas, int clima, Piloto p) {
+        return false;
+    }
+
     public boolean equals(Object o)
     {
         if(this==o)
