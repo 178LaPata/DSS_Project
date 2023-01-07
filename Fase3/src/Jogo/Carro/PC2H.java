@@ -1,6 +1,7 @@
+package Jogo.Carro;
 
 /**
- * Write a description of class GTH here.
+ * Write a description of class PC2H here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -8,31 +9,31 @@
 
 import java.util.Random;
 
-public class GTH extends GT implements Hibrido
+public class PC2H extends PC2 implements Hibrido
 {
     private int motor_eletrico;
     
-    public GTH()
+    public PC2H()
     {
         super();
         this.motor_eletrico = 0;
     }
     
-    public GTH(String marca, String modelo, int cilindrada, int potencia,int eletrico, int pac)
+    public PC2H(String marca, String modelo, int cilindrada, int potencia, int pac, int p_mecanica, int eletrico)
     {
-        super(marca,modelo,cilindrada,potencia,pac);
+        super(marca,modelo,cilindrada,potencia,pac,p_mecanica);
         this.motor_eletrico = eletrico;
     }
-    
-    public GTH(GTH p)
+
+    public PC2H(PC2H p)
     {
         super(p);
         this.motor_eletrico = p.getPotenciaMotorEletrico();
     }
     
-    public GTH clone()
+    public PC2H clone()
     {
-        return new GTH(this);
+        return new PC2H(this);
     }
     
     public int getPotenciaMotorEletrico()
@@ -40,27 +41,25 @@ public class GTH extends GT implements Hibrido
         return this.motor_eletrico;
     }
     
-    public void setPotenciaMotorEletrico(int potencia)
+    public void setPotenciaMotorEletrico(int e)
     {
-        this.motor_eletrico = potencia;
+        this.motor_eletrico = e; 
     }
     
     public boolean DNF(int volta, int totalvoltas, int clima, PlayCarro.MotorMode modoM)
     {
         double degMM=0;
         switch (modoM){
-            case Conservador -> degMM=0.5;
+            case Conservador -> degMM=2;
             case Normal -> degMM=1;
-            case Agressivo -> degMM=2;
+            case Agressivo -> degMM=0.5;
         }
        Random rand=new Random();
-       int x=rand.nextInt(70);
-       int motorh = this.getPotenciaMotorEletrico()/20; 
+       int x=rand.nextInt(85);
+       int motorh = this.getPotenciaMotorEletrico()/20;
        //no maximo fiabilidade de 85%
-       // 3000 cilindrada = 85% / 4500 cilindrada = 57%
-       int fiabilidade = (int)((100000/super.getCilindrada())*2.55);
-       int desgaste = (int)((volta+1)*0.5*degMM); //0.5% a cada volta
-       return (x > (fiabilidade - desgaste - motorh));
+       int fiabilidade = (int) (super.getFiabilidade() + (super.getCilindrada()/1200) + (super.getPreparacaoMecanica()/10)* degMM);
+       return (x > (fiabilidade-motorh));
     }
     
     public boolean equals(Object o)
@@ -71,7 +70,7 @@ public class GTH extends GT implements Hibrido
         if(o==null || this.getClass()!=o.getClass())
         return false;
         
-        GTH c = (GTH) o;
+        PC2H c = (PC2H) o;
         return ( super.equals(c) && this.motor_eletrico == c.getPotenciaMotorEletrico());
     }   
 }

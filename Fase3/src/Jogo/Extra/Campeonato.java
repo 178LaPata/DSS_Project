@@ -1,3 +1,5 @@
+package Jogo.Extra;
+
 /**
  * Write a description of class Campeonato here.
  * 

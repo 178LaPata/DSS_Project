@@ -1,3 +1,6 @@
+package Jogo.Extra;
+import Jogo.Carro.*;
+
 /**
  * Write a description of class Corrida here.
  * 
