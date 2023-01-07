@@ -1,5 +1,4 @@
 package Jogo.Extra;
-import Jogo.Carro.*;
 
 public class CircuitoParte {
     //Variáveis de Instância

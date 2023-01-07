@@ -1,5 +1,4 @@
 package Jogo.Carro;
-import Jogo.Extra.*;
 
 /**
  * Write a description of class PC2H here.
