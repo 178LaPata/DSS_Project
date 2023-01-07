@@ -18,7 +18,7 @@ USE `DSS_Project` ;
 -- -----------------------------------------------------
 -- Table `DSS_Project`.`Campeonato`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DSS_Project`.`Palete` (
+CREATE TABLE IF NOT EXISTS `DSS_Project`.`Campeonato` (
   `idCampeonato` INT NOT NULL, 
   `nomeCamp` VARCHAR(40) NOT NULL,
   `corridas` TEXT(10000) NOT NULL,
