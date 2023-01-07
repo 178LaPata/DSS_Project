@@ -1,3 +1,4 @@
+
 import java.util.Map;
 
 public class PlayCarro implements Comparable<PlayCarro>{
@@ -145,7 +146,11 @@ public class PlayCarro implements Comparable<PlayCarro>{
         long fator_sorte = minimum + Double.valueOf(Math.random()*(maximum-minimum)).intValue();
         long maximum_chuva = 2000;
         long fator_sorte_chuva= minimum + Double.valueOf(Math.random()*(maximum_chuva-minimum)).intValue();
-        return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())-this.driver.getSVA())* 1000L) - fator_sorte
+        if(this.car instanceof Hibrido){
+            return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())+(this.car.getCilindrada()/((Hibrido) this.car).getPotenciaMotorEletrico())-this.driver.getSVA())* 1000L) - fator_sorte
+                    + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva;
+        }
+        else return (t_medio + ((this.car.getCilindrada()/this.car.getPotencia())-this.driver.getSVA())* 1000L) - fator_sorte
                     + (clima*(t_chuva - this.driver.getCTS()* 1000L)) - fator_sorte_chuva;
 
 

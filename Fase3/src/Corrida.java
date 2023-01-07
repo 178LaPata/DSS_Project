@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Corrida here.
  * 
@@ -204,6 +203,12 @@ public class Corrida implements Serializable
             {
                 if(!c.getDNF()) //verifica se o carro esta acidentado
                 {
+                    if(c.getCarro() instanceof SC){
+                        if(c.getCarro().DNF(i,voltas,this.clima,c.getPiloto())){
+                            c.setDNF(true);
+                            temp.put(c.clone(),i);
+                        }
+                    }
                     if(c.getCarro().DNF(i, voltas, this.clima)) //verifica se o carro tem acidente na volta
                     {
                         c.setDNF(true);
