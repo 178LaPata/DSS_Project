@@ -186,7 +186,36 @@ public class Corrida implements Serializable
     {
       this.listaCarros.clear();
     }
-    
+
+    public boolean checkUltrapassagem(PlayCarro c1, PlayCarro c2, CircuitoParte cp){
+        Random rand= new Random();
+        boolean y= false;
+        int x = rand.nextInt(100);
+        switch (cp.getTipo()){
+            case Curva:
+                switch (cp.getGdu()) {
+                    case Impossivel:
+                        y= (90 > x * (c1.getPacAfin()));
+                    case Dificl:
+                        y= (75 > x * (c1.getPacAfin()));
+                    case Possivel:
+                        y = (50 > x * (c1.getPacAfin()));
+                }
+            case Reta:
+                switch (cp.getGdu()){
+                    case Impossivel:
+                        y = (90 > x*(1 - c1.getPacAfin()));
+                    case Dificl:
+                        y = (75 > x*(1 - c1.getPacAfin()));
+                    case Possivel:
+                        y = (50 > x*(1 - c1.getPacAfin()));
+                }
+            case Chicane:
+                y = (90 > x*c1.getPiloto().getSVA());
+        }
+        return y;
+    }
+
     /**
      * Simula a corrida 
      */   
