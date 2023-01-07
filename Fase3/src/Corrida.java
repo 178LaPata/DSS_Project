@@ -135,6 +135,7 @@ public class Corrida implements Serializable
        this.circuito = c.clone();
    }
    
+   
    //Metodos
    
    public Corrida clone()
@@ -186,7 +187,7 @@ public class Corrida implements Serializable
     }
     
     /**
-     * Simula a corrida
+     * Simula a corrida 
      */   
     public void simulaCorrida()
     {

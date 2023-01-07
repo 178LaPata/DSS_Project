@@ -198,7 +198,7 @@ public class Campeonato implements Serializable
                 if(!(c instanceof Hibrido))
                 {
                 old_value = 0;
-                String g = c.getMarca()+" "+c.getModelo() +" \t"+c.getEquipa().getNome()+" \t"+c.getClass().getName();
+                String g = c.getMarca()+" "+c.getModelo() +" \t"+c.getClass().getName();
                 if(this.classificacao.containsKey(g))
                 {
                     old_value = this.classificacao.get(g);
@@ -237,7 +237,7 @@ public class Campeonato implements Serializable
                 if(!(q instanceof Hibrido))
                 {
                     old_value = 0;
-                    String a = q.getMarca()+" "+q.getModelo() +" \t"+q.getEquipa().getNome()+" \t"+q.getClass().getName();
+                    String a = q.getMarca()+" "+q.getModelo() +" \t"+q.getClass().getName();
                     if(this.classificacao.containsKey(a))
                         old_value = this.classificacao.get(a);
                     this.classificacao.put(a,0+old_value);
@@ -258,7 +258,7 @@ public class Campeonato implements Serializable
                 if(c instanceof Hibrido)
                 {
                 old_value = 0;
-                String g = c.getMarca()+" "+c.getModelo() +" \t"+c.getEquipa().getNome()+" \t"+c.getClass().getName();
+                String g = c.getMarca()+" "+c.getModelo() +" \t"+c.getClass().getName();
                 if(this.classificacaoH.containsKey(g))
                 {
                     old_value = this.classificacaoH.get(g);
@@ -297,7 +297,7 @@ public class Campeonato implements Serializable
                 if(q instanceof Hibrido)
                 {
                     old_value = 0;
-                    String a = q.getMarca()+" "+q.getModelo() +" \t"+q.getEquipa().getNome()+" \t"+q.getClass().getName();
+                    String a = q.getMarca()+" "+q.getModelo() +" \t"+q.getClass().getName();
                     if(this.classificacaoH.containsKey(a))
                         old_value = this.classificacaoH.get(a);
                     this.classificacaoH.put(a,0+old_value);
