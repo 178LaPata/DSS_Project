@@ -219,7 +219,7 @@ public class Corrida implements Serializable
     /**
      * Simula a corrida 
      */   
-    public void simulaCorrida()
+    public void simulaCorridaTempo()
     {
         int voltas = this.circuito.getNumVoltas();
         long t_aux, t_volta;

@@ -119,7 +119,7 @@ public class Campeonato implements Serializable
         }
         else
         {
-            this.corridas.get(this.prova).simulaCorrida();
+            this.corridas.get(this.prova).simulaCorridaTempo();
             //sb.append(this.corridas.get(this.prova).printResultados());
             res = this.corridas.get(this.prova).printResultados();
             this.prova++;
